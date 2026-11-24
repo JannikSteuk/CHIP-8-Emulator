@@ -1,3 +1,11 @@
+# Self Added 
+build/
+.cache/
+compile_commands.json
+
+
+# ======= Template ===========
+
 # Prerequisites
 *.d
 

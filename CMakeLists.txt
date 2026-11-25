@@ -11,6 +11,7 @@ find_package(SDL2 REQUIRED)
 add_executable(chip8
     src/main.cpp
     src/chip8.cpp
+    src/display.cpp
 )
 
 target_link_libraries(chip8 PRIVATE SDL2::SDL2)

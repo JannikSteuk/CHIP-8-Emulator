@@ -1,12 +1,10 @@
+#pragma once
 #include <array>
 #include <cstdint>
 
 class Chip8 {
 public:
   Chip8();
-
-  // Durch constexpr steht direkt zur compilezeit fest für alle klassen gleiches
-  // Objekt
 
   // k hier wegen konstante
   static constexpr std::size_t kMemorySize = 4096;
@@ -15,12 +13,23 @@ public:
   static constexpr std::size_t kDisplayWidth = 64;
   static constexpr std::size_t kDisplayHeight = 32;
 
+  // Alias Deklaration
+  using DisplayBuffer = std::array<bool, kDisplayWidth * kDisplayHeight>;
+
+  // Funktionen
   [[nodiscard]] static constexpr std::size_t pixelIndex(std::size_t x,
                                                         std::size_t y) {
     return (y * kDisplayWidth) + x;
   }
 
+  [[nodiscard]] const DisplayBuffer &display();
+
+  bool drawFlag();
+  void clearDrawFlag();
+
 private:
+  // === FLAGS ===
+  bool bDrawFlag_ = false;
   // ohne constexpr würde hier kMemorySize nicht funktionieren
   // memory_ zeigt, dass private member
   std::array<std::uint8_t, kMemorySize> memory_{};
